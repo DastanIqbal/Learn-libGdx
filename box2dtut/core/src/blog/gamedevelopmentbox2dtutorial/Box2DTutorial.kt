@@ -13,6 +13,9 @@ class Box2DTutorial : Game() {
     private var loadingScreen: LoadingScreen? = null
     var batch: SpriteBatch?=null
     var font: BitmapFont?=null
+
+    var preferences=AppPreferences()
+
     override fun create() {
         batch = SpriteBatch()
         font = BitmapFont()

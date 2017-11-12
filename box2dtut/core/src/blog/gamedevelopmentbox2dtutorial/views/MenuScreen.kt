@@ -25,13 +25,13 @@ class MenuScreen(private val parent: Box2DTutorial) : Screen, ChangeListener() {
     private var newGame: TextButton
 
     init {
-        Gdx.input.inputProcessor = stage
+        stage.clear()
         stage.act(Math.min(Gdx.graphics.deltaTime, 1 / 30f))
         stage.draw()
 
         val table = Table()
         table.setFillParent(true)
-        table.debug = true
+        // table.debug = true
         stage.addActor(table)
 
         val skin = Skin(Gdx.files.internal("skin/glassy-ui.json"))
@@ -50,6 +50,7 @@ class MenuScreen(private val parent: Box2DTutorial) : Screen, ChangeListener() {
         newGame.addListener(this)
         prefernces.addListener(this)
     }
+
     override fun changed(event: ChangeEvent?, actor: Actor?) {
         when (actor) {
             prefernces -> parent.changeScreen(Box2DTutorial.PREFERENCES)
@@ -57,8 +58,9 @@ class MenuScreen(private val parent: Box2DTutorial) : Screen, ChangeListener() {
             exit -> Gdx.app.exit()
         }
     }
-    override fun show() {
 
+    override fun show() {
+        Gdx.input.inputProcessor = stage
     }
 
     override fun render(delta: Float) {
