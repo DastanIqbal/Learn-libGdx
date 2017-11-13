@@ -1,5 +1,6 @@
 package blog.gamedevelopmentbox2dtutorial.model
 
+import blog.gamedevelopmentbox2dtutorial.BodyFactory
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.*
 
@@ -15,6 +16,25 @@ class B2DModel {
         createFloor()
         createObject()
         createMovingObject()
+        // get our body factory singleton and store it in bodyFactory
+        val bodyFactory = BodyFactory.getInstance(world)
+        // add a new rubber ball at position 1, 1
+        bodyFactory.makeCirclePolyBody(1f, 1f, 2f, BodyFactory.RUBBER, BodyDef.BodyType.DynamicBody)
+
+        // add a new rubber ball at position 4, 1
+        bodyFactory.makeCirclePolyBody(4f, 1f, 2f, BodyFactory.STEEL, BodyDef.BodyType.DynamicBody)
+
+        // add a new rubber ball at position -4, 1
+        bodyFactory.makeCirclePolyBody(-4f, 1f, 2f, BodyFactory.STONE, BodyDef.BodyType.DynamicBody)
+
+        bodyFactory.makeBoxPolyBody(10f, 10f, 2f, 2f, BodyFactory.WOOD, BodyDef.BodyType.DynamicBody)
+
+        val bodyDef = BodyDef()
+        bodyDef.type = BodyDef.BodyType.DynamicBody
+        bodyDef.position.x = -10f
+        bodyDef.position.y = -10f
+        val body = world.createBody(bodyDef)
+        bodyFactory.makeConeSensor(body, 2f)
     }
 
     fun logicStep(delta: Float) {
