@@ -1,5 +1,6 @@
 package blog.gamedevelopmentbox2dtutorial.model
 
+import blog.gamedevelopmentbox2dtutorial.B2DContactListener
 import blog.gamedevelopmentbox2dtutorial.BodyFactory
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.*
@@ -11,33 +12,29 @@ import com.badlogic.gdx.physics.box2d.*
  */
 class B2DModel {
     val world = World(Vector2(0f, -10f), true)
+    var isSwimming = false
+    var player: Body
 
     init {
+        world.setContactListener(B2DContactListener(this))
         createFloor()
-        createObject()
-        createMovingObject()
         // get our body factory singleton and store it in bodyFactory
         val bodyFactory = BodyFactory.getInstance(world)
-        // add a new rubber ball at position 1, 1
-        bodyFactory.makeCirclePolyBody(1f, 1f, 2f, BodyFactory.RUBBER, BodyDef.BodyType.DynamicBody)
 
-        // add a new rubber ball at position 4, 1
-        bodyFactory.makeCirclePolyBody(4f, 1f, 2f, BodyFactory.STEEL, BodyDef.BodyType.DynamicBody)
+        // add a player
+        player = bodyFactory.makeBoxPolyBody(1f, 1f, 2f, 2f, BodyFactory.RUBBER, BodyDef.BodyType.DynamicBody)
 
-        // add a new rubber ball at position -4, 1
-        bodyFactory.makeCirclePolyBody(-4f, 1f, 2f, BodyFactory.STONE, BodyDef.BodyType.DynamicBody)
-
-        bodyFactory.makeBoxPolyBody(10f, 10f, 2f, 2f, BodyFactory.WOOD, BodyDef.BodyType.DynamicBody)
-
-        val bodyDef = BodyDef()
-        bodyDef.type = BodyDef.BodyType.DynamicBody
-        bodyDef.position.x = -10f
-        bodyDef.position.y = -10f
-        val body = world.createBody(bodyDef)
-        bodyFactory.makeConeSensor(body, 2f)
+        // add some water
+        val water = bodyFactory.makeBoxPolyBody(1f, -8f, 40f, 10f, BodyFactory.RUBBER, BodyDef.BodyType.StaticBody)
+        water.userData = "IAMTHESEA"
+        // make the water a sensor so it doesn't obstruct our player
+        bodyFactory.makeAllFixturesSensors(water)
     }
 
     fun logicStep(delta: Float) {
+        if (isSwimming) {
+            player.applyForceToCenter(0f, 50f, true)
+        }
         world.step(delta, 3, 3)
     }
 

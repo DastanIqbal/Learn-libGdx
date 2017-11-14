@@ -92,7 +92,7 @@ class BodyFactory private constructor(private val world: World) {
         //create the body to attach said definition
         val boxBody = world.createBody(bodyDef)
         val polygonShape = PolygonShape()
-        polygonShape.setAsBox(width / 2, width / 2)
+        polygonShape.setAsBox(width / 2, height / 2)
         boxBody.createFixture(makeFixture(material, polygonShape))
         polygonShape.dispose()
         return boxBody
@@ -117,7 +117,7 @@ class BodyFactory private constructor(private val world: World) {
 
     fun makeConeSensor(body: Body, size: Float) {
         val fixtureDef = FixtureDef()
-       // fixtureDef.isSensor = true
+        // fixtureDef.isSensor = true
         val polygon = PolygonShape()
         val radius = size
         val vertices = arrayOfNulls<Vector2>(5)
@@ -132,4 +132,9 @@ class BodyFactory private constructor(private val world: World) {
         polygon.dispose()
     }
 
+    fun makeAllFixturesSensors(bod: Body) {
+        for (fix in bod.fixtureList) {
+            fix.isSensor = true
+        }
+    }
 }
