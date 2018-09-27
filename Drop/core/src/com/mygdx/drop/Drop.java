@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
  * Created by dastaniqbal on 11/11/2017.
- * dastanIqbal@marvelmedia.com
  * 11/11/2017 2:40
  */
 

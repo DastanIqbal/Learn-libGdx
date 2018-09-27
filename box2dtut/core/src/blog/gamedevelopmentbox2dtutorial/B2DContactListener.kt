@@ -6,7 +6,6 @@ import com.badlogic.gdx.physics.box2d.*
 
 /**
  * Created by dastaniqbal on 14/11/2017.
-
  * 14/11/2017 10:01
  */
 class B2DContactListener(val parent: B2DModel) : ContactListener {
