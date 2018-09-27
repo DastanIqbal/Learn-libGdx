@@ -6,7 +6,7 @@ import com.badlogic.gdx.physics.box2d.*
 
 /**
  * Created by dastaniqbal on 13/11/2017.
- * dastanIqbal@marvelmedia.com
+
  * 13/11/2017 10:19
  */
 class BodyFactory private constructor(private val world: World) {

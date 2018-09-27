@@ -5,7 +5,7 @@ import com.badlogic.gdx.Preferences
 
 /**
  * Created by dastaniqbal on 12/11/2017.
- * dastanIqbal@marvelmedia.com
+
  * 12/11/2017 3:32
  */
 class AppPreferences {

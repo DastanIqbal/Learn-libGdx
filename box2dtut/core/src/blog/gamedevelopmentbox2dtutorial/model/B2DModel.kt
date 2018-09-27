@@ -7,7 +7,7 @@ import com.badlogic.gdx.physics.box2d.*
 
 /**
  * Created by dastaniqbal on 12/11/2017.
- * dastanIqbal@marvelmedia.com
+
  * 12/11/2017 6:47
  */
 class B2DModel {
